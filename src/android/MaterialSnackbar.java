@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import android.support.design.widget.Snackbar;
 import android.widget.FrameLayout;
 import android.view.View;
+import android.graphics.Color;
+import android.widget.TextView;
 
 public class MaterialSnackbar extends CordovaPlugin {
 
@@ -32,6 +34,12 @@ public class MaterialSnackbar extends CordovaPlugin {
                 final String duration = arg_object.getString("duration");
 
                 final String button = arg_object.getString("button");
+
+				final String textColor = arg_object.getString("textColor");
+
+				final String actionColor = arg_object.getString("actionColor");
+
+				final String bgColor = arg_object.getString("bgColor");
 
                 cordova.getActivity().runOnUiThread(new Runnable() {
                     public void run() {
@@ -56,6 +64,21 @@ public class MaterialSnackbar extends CordovaPlugin {
                               }
                           });
                         }
+
+						if(!textColor.isEmpty())
+							snackbar.setActionTextColor(Color.parseColor(textColor));
+						
+						// Getting view
+						View sbView = snackbar.getView();
+
+						if(!actionColor.isEmpty()) {
+							TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+							textView.setTextColor(Color.parseColor(actionColor));
+						}
+
+						if(!bgColor.isEmpty())
+							sbView.setBackgroundColor(Color.parseColor(bgColor));
+
                         snackbar.show();
                     }
                 });
