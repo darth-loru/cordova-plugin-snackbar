@@ -1,4 +1,4 @@
-var snackbar = function(text, duration, button, successCallback){
+var snackbar = function(text, duration, button, textColor, actionColor, bgColor, successCallback){
 
     cordova.exec(
             successCallback, // success callback function
@@ -8,7 +8,10 @@ var snackbar = function(text, duration, button, successCallback){
             [{                  // and this array of custom arguments to create our entry
                 "text": text,
                 "duration": duration,
-                "button": button
+                "button": button,
+                "textColor": textColor,
+                "actionColor": actionColor, 
+                "bgColor": bgColor
             }]
         );
 }
